@@ -1,22 +1,13 @@
-div {
-height: 300px;
-
+.number{
+height: 100px;
 width: 400px;
-
 background-color: #BCD2EE;
-
 border: 10px dashed #012E97;
-
 border-radius: 10px; /*Obtaining round edges*/
-
 margin: auto; /*centering the button*/
-
-text-align: center;
-
 color: red;
-
 font-size: 300px;
-
 font-weight: bold;
-
+margin-left: 2cm;
+display: inline;
 }
