@@ -1,0 +1,22 @@
+div {
+height: 300px;
+
+width: 400px;
+
+background-color: #BCD2EE;
+
+border: 10px dashed #012E97;
+
+border-radius: 10px; /*Obtaining round edges*/
+
+margin: auto; /*centering the button*/
+
+text-align: center;
+
+color: red;
+
+font-size: 300px;
+
+font-weight: bold;
+
+}

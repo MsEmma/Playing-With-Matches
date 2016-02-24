@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Show a number</title>
+	<title>Playing With Matches</title>
 
-	<style type="text/css">
-	/* CSS goes here */
-  div {
-	height: 600px;
+	<link rel="stylesheet" href="styles.css">
 
-	width: 1200px;
-
-	background-color: #BCD2EE;
-
-	border: 10px dashed #6495ED;
-
-	border-radius: 10px; /*Obtaining round edges*/
-
-	margin: auto; /*centering the button*/
-
-	text-align: center;
-	}
-	</style>
 </head>
 <body>
-	<div><h1 style="font-size: 300px; color:red"> 7 </h1> </div>
+
+	<div id="random"></div> 
+
+	<script type="text/javascript">
+
+	function getRandomNumber(min,max) {
+		return Math.floor(Math.random()*9)+1;
+	}
+
+	function displayNumber(){
+		return 	document.getElementById("random").innerHTML = getRandomNumber(1,10);
+	}
+
+	displayNumber();
+
+	</script>
 </body>
 </html>
