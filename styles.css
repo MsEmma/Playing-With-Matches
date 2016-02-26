@@ -1,18 +1,17 @@
 body {
-  background-image: url("http://www.webdesignhot.com/free-vector-graphics/flower-pink-background-vector-art/");
+  display: inline-table;;
 }
 
-.number{
+.number {
   padding: 0px 45px;
   background-color: #BCD2EE;
   border: 10px ridge #9CBAFF;
   border-radius: 10px; /*Obtaining round edges*/
-  margin: auto; /*centering the button*/
+  margin-top: 2px;
   color: red;
-  font-size: 150px;
+  font-size: 120px;
   font-weight: bold;
-  margin: auto;
-  display: inline;
+  display: inline-block;
   text-align: center;
 }
 
@@ -21,9 +20,28 @@ body {
   color: green;
 }
 
+.highLight {
+  background-color:#BDF834;
+  color: green;
+}
+
 #display {
   color: blue;
-  font-size: 50px;
-  margin-left: 5cm;
-  margin-top: 400px;
+  font-size: 20px;
+}
+
+button {
+  padding: 0px 45px;
+  background-color:#00FFFF;
+  border-radius: 15px; /*Obtaining round edges*/
+  margin: auto; /*centering the button*/
+  font-family: serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: #230832;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 3cm;
+  margin-top: 0.5cm;
+  box-shadow: 0 9px #999;
 }

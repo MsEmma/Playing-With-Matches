@@ -1,3 +1,8 @@
+
+function refreshPage(){
+    window.location.reload();
+}
+
 function getRandomNumber(min,max) {
   return Math.floor(Math.random()*max)+min;
 }
@@ -12,52 +17,54 @@ function displayNumber(){
 
 displayNumber();
 
-// function checkForMatches(){
-//   //find matches
-//   if (firstNumber === randomNumbers[1].innerHTML){
-//     alert("match");
-//   }
-//}
+var message = document.getElementById("display");
 
-function highLightMatches(){
+function rowMatches(rowBegin,rowEnd){
 
-  var message = document.getElementById("display");
-  var case_one = randomNumbers[0].innerHTML === randomNumbers[1].innerHTML;
-  var case_two = randomNumbers[0].innerHTML === randomNumbers[2].innerHTML;
-  var case_three = randomNumbers[1].innerHTML === randomNumbers[2].innerHTML;
-  var firstNumber = randomNumbers[0].innerHTML;
-  var secondNumber = randomNumbers[1].innerHTML;
-  var thirdNumber = randomNumbers[2].innerHTML;
+  var matches = []
 
-  if (case_one && case_three) {
-    randomNumbers[0].classList.add("highlight");
-    randomNumbers[1].classList.add("highlight");
-    randomNumbers[2].classList.add("highlight");
-    message.innerHTML = 'There are three matches, three ' + firstNumber + 's';
-    }
+  if (randomNumbers[rowBegin].innerHTML === randomNumbers[rowBegin + 1].innerHTML) {
+    randomNumbers[rowBegin].classList.add("highlight");
+    randomNumbers[rowBegin + 1].classList.add("highlight");
 
-  else if (case_one){
-    randomNumbers[0].classList.add("highlight");
-    randomNumbers[1].classList.add("highlight");
-    message.innerHTML = 'There is one match, two ' + firstNumber + 's';
-    }
+    matches.push(randomNumbers[rowBegin].innerHTML);
+  }
 
-  else if (case_two){
-    randomNumbers[0].classList.add("highlight");
-    randomNumbers[2].classList.add("highlight");
-    message.innerHTML = 'There is one match, two ' + firstNumber + 's';
-    }
+  if (randomNumbers[rowEnd].innerHTML === randomNumbers[rowEnd - 1].innerHTML) {
+    randomNumbers[rowEnd].classList.add("highlight");
+    randomNumbers[rowEnd - 1].classList.add("highlight");
 
-  else if (case_three){
-    randomNumbers[1].classList.add("highlight");
-    randomNumbers[2].classList.add("highlight");
-    message.innerHTML = 'There is one match, two ' + secondNumber + 's';
-    }
+    matches.push(randomNumbers[rowEnd].innerHTML);
+  }
+  return matches[0];
+}
 
-  else {
-    message.innerHTML = 'There are no matches';
+rowMatches(0,2);
+rowMatches(3,5);
+rowMatches(6,8);
+
+function whichRow(rowBegin,rowEnd){
+
+  if (rowBegin === 0 || rowEnd === 2){
+    return "Row-one"
+  }
+  else if (rowBegin === 3 || rowEnd === 5){
+    return "Row-two"
+  }
+  else if (rowBegin === 6 || rowEnd === 8){
+    return "Row-three"
   }
 
 }
 
-highLightMatches();
+function checkForRowMatches(rowBegin,rowEnd){
+
+  if (rowMatches(rowBegin,rowEnd) !== undefined){
+    return ("There is a match on " + whichRow(rowBegin,rowEnd) + " and the matching numbers are " + rowMatches(rowBegin,rowEnd) + ' s ' );
+  }
+  else {
+    return ('There is no match in ' + whichRow(rowBegin,rowEnd));
+  }
+}
+
+message.innerHTML = checkForRowMatches(0,2) + " and <br> " + checkForRowMatches(3,5) + " and <br> " + checkForRowMatches(6,8);
