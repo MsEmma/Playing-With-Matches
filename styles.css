@@ -9,20 +9,25 @@ body {
   border-radius: 10px; /*Obtaining round edges*/
   margin-top: 2px;
   color: red;
-  font-size: 120px;
+  font-size: 100px;
   font-weight: bold;
   display: inline-block;
   text-align: center;
 }
 
-.highlight {
+.rowHighlight {
   background-color:#FFFF00;
   color: green;
 }
 
-.highLight {
-  background-color:#BDF834;
-  color: green;
+.colHighlight {
+  background-color:white;
+  color: blue;
+}
+
+.diagHighlight {
+  background-color:white;
+  color: black;
 }
 
 #display {
