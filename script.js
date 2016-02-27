@@ -61,6 +61,7 @@ function colMatches(colBegin,colEnd){
   if (randomNumbers[colEnd].innerHTML === randomNumbers[colEnd - 3].innerHTML) {
     randomNumbers[colEnd].classList.add("colHighlight");
     randomNumbers[colEnd - 3].classList.add("colHighlight");
+<<<<<<< HEAD
 
     col_matches.push(randomNumbers[colEnd].innerHTML);
   }
@@ -104,6 +105,51 @@ function diag1Matches(diag1Begin,diag1End){
     diag1_matches.push(randomNumbers[diag1Begin].innerHTML);
   }
 
+=======
+
+    col_matches.push(randomNumbers[colEnd].innerHTML);
+  }
+
+  return (col_matches[0]);
+}
+
+//Check for left to right, top to bottom diagonal match and highlight
+
+function diagMatches(diagBegin,diagEnd){
+
+  var diag_matches = [];
+
+  if (randomNumbers[diagBegin].innerHTML === randomNumbers[diagBegin + 4 ].innerHTML) {
+    randomNumbers[diagBegin].classList.add("diagHighlight");
+    randomNumbers[diagBegin + 4 ].classList.add("diagHighlight");
+
+    diag_matches.push(randomNumbers[diagBegin].innerHTML);
+  }
+
+  if (randomNumbers[diagEnd].innerHTML === randomNumbers[diagEnd - 4].innerHTML) {
+    randomNumbers[diagEnd].classList.add("diagHighlight");
+    randomNumbers[diagEnd - 4].classList.add("diagHighlight");
+
+    diag_matches.push(randomNumbers[diagEnd].innerHTML);
+  }
+
+  return (diag_matches[0]);
+}
+
+//Check for right to left, top to bottom diagonal match and highlight
+
+function diag1Matches(diag1Begin,diag1End){
+
+  var diag1_matches = [];
+
+  if (randomNumbers[diag1Begin].innerHTML === randomNumbers[diag1Begin + 2 ].innerHTML) {
+    randomNumbers[diag1Begin].classList.add("diagHighlight");
+    randomNumbers[diag1Begin + 2 ].classList.add("diagHighlight");
+
+    diag1_matches.push(randomNumbers[diag1Begin].innerHTML);
+  }
+
+>>>>>>> master
   if (randomNumbers[diag1End].innerHTML === randomNumbers[diag1End - 2].innerHTML) {
     randomNumbers[diag1End].classList.add("diagHighlight");
     randomNumbers[diag1End - 2].classList.add("diagHighlight");
@@ -162,6 +208,7 @@ function rowMatchDisplay(rowBegin,rowEnd){
 
   if (rowMatches(rowBegin,rowEnd) !== undefined){
     return ("Match found in " + whichRow(rowBegin,rowEnd) + " with " + rowMatches(rowBegin,rowEnd) + 's matching' );
+<<<<<<< HEAD
   }
   else {
     return ('No match in ' + whichRow(rowBegin,rowEnd));
@@ -180,5 +227,23 @@ function colMatchDisplay(colBegin,colEnd){
 
 function diagMatchDisplay()
 
+=======
+  }
+  else {
+    return ('No match in ' + whichRow(rowBegin,rowEnd));
+  }
+}
+
+function colMatchDisplay(colBegin,colEnd){
+
+  if (colMatches(colBegin,colEnd) !== undefined){
+    return ("Match in " + whichCol(colBegin,colEnd) + " with " + colMatches(colBegin,colEnd) + 's matching' );
+  }
+  else {
+    return ('No match in ' + whichCol(colBegin,colEnd));
+  }
+}
+
+>>>>>>> master
 rowMessage.innerHTML = rowMatchDisplay(0,2) + " and <br> " + rowMatchDisplay(3,5) + " and <br> " + rowMatchDisplay(6,8);
 colMessage.innerHTML = colMatchDisplay(0,6) + " and <br> " + colMatchDisplay(1,7) + " and <br> " + colMatchDisplay(2,8);
