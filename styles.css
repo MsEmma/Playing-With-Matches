@@ -1,5 +1,5 @@
 body {
-  display: inline-table;;
+  display: inline;
 }
 
 .number {
@@ -21,18 +21,19 @@ body {
 }
 
 .colHighlight {
-  background-color:white;
+  background-color:#FFB600;
   color: blue;
 }
 
 .diagHighlight {
-  background-color:white;
+  background-color:#BBFF00;
   color: black;
 }
 
 #display {
   color: blue;
   font-size: 20px;
+  display: inline-block;
 }
 
 button {
