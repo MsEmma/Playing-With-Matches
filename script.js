@@ -1,156 +1,79 @@
 //Refresh page button
 
-function refreshPage(){
+function refreshPage() {
   window.location.reload();
 }
 
 //Generate random function
 
-function getRandomNumber(min,max) {
-  return Math.floor(Math.random()*max)+min;
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * max) + min;
 }
 
 //display random numbers
 
 var randomNumbers = document.querySelectorAll(".number");
 
-function displayNumber(){
+function displayNumber() {
   for (i = 0; i < randomNumbers.length; i++) {
-    randomNumbers[i].innerHTML = getRandomNumber(1,9);
+    randomNumbers[i].innerHTML = getRandomNumber(1, 9);
   }
 }
 
 displayNumber();
 
-//Check for row matches and highlight
+function checkMatches(start, end, gap, highlight) {
 
-function rowMatches(rowBegin,rowEnd){
+  var matches = [];
 
-  var row_matches = [];
+  if (randomNumbers[start].innerHTML === randomNumbers[start + gap].innerHTML) {
+    randomNumbers[start].classList.add(highlight);
+    randomNumbers[start + gap].classList.add(highlight);
 
-  if (randomNumbers[rowBegin].innerHTML === randomNumbers[rowBegin + 1].innerHTML) {
-    randomNumbers[rowBegin].classList.add("rowHighlight");
-    randomNumbers[rowBegin + 1].classList.add("rowHighlight");
-
-    row_matches.push(randomNumbers[rowBegin].innerHTML);
+    matches.push(randomNumbers[start].innerHTML);
   }
 
-  if (randomNumbers[rowEnd].innerHTML === randomNumbers[rowEnd - 1].innerHTML) {
-    randomNumbers[rowEnd].classList.add("rowHighlight");
-    randomNumbers[rowEnd - 1].classList.add("rowHighlight");
+  if (randomNumbers[end].innerHTML === randomNumbers[end - gap].innerHTML) {
+    randomNumbers[end].classList.add(highlight);
+    randomNumbers[end - gap].classList.add(highlight);
 
-    row_matches.push(randomNumbers[rowEnd].innerHTML);
+    matches.push(randomNumbers[end].innerHTML);
   }
 
-  return (row_matches[0]);
+  return (matches[0]);
 }
 
-//Check for column matches and highlight
+checkMatches(0, 2, 1, "rowHighlight");
+checkMatches(3, 5, 1, "rowHighlight");
+checkMatches(6, 8, 1, "rowHighlight");
 
-function colMatches(colBegin,colEnd){
+checkMatches(0, 6, 3, "colHighlight");
+checkMatches(1, 7, 3, "colHighlight");
+checkMatches(2, 8, 3, "colHighlight");
 
-  var col_matches = [];
+checkMatches(0, 8, 4, "diagHighlight");
+checkMatches(2, 6, 2, "diagHighlight");
 
-  if (randomNumbers[colBegin].innerHTML === randomNumbers[colBegin + 3 ].innerHTML) {
-    randomNumbers[colBegin].classList.add("colHighlight");
-    randomNumbers[colBegin + 3 ].classList.add("colHighlight");
+//Search which row or column has matches
 
-    col_matches.push(randomNumbers[colBegin].innerHTML);
-  }
+function whichRowOrCol(start, end, gap, highlight) {
 
-  if (randomNumbers[colEnd].innerHTML === randomNumbers[colEnd - 3].innerHTML) {
-    randomNumbers[colEnd].classList.add("colHighlight");
-    randomNumbers[colEnd - 3].classList.add("colHighlight");
-
-    col_matches.push(randomNumbers[colEnd].innerHTML);
-  }
-
-  return (col_matches[0]);
-}
-
-//Check for left to right, top to bottom diagonal match and highlight
-
-function diagMatches(diagBegin,diagEnd){
-
-  var diag_matches = [];
-
-  if (randomNumbers[diagBegin].innerHTML === randomNumbers[diagBegin + 4 ].innerHTML) {
-    randomNumbers[diagBegin].classList.add("diagHighlight");
-    randomNumbers[diagBegin + 4 ].classList.add("diagHighlight");
-
-    diag_matches.push(randomNumbers[diagBegin].innerHTML);
-  }
-
-  if (randomNumbers[diagEnd].innerHTML === randomNumbers[diagEnd - 4].innerHTML) {
-    randomNumbers[diagEnd].classList.add("diagHighlight");
-    randomNumbers[diagEnd - 4].classList.add("diagHighlight");
-
-    diag_matches.push(randomNumbers[diagEnd].innerHTML);
-  }
-
-  return (diag_matches[0]);
-}
-
-//Check for right to left, top to bottom diagonal match and highlight
-
-function diag1Matches(diag1Begin,diag1End){
-
-  var diag1_matches = [];
-
-  if (randomNumbers[diag1Begin].innerHTML === randomNumbers[diag1Begin + 2 ].innerHTML) {
-    randomNumbers[diag1Begin].classList.add("diagHighlight");
-    randomNumbers[diag1Begin + 2 ].classList.add("diagHighlight");
-
-    diag1_matches.push(randomNumbers[diag1Begin].innerHTML);
-  }
-
-
-  if (randomNumbers[diag1End].innerHTML === randomNumbers[diag1End - 2].innerHTML) {
-    randomNumbers[diag1End].classList.add("diagHighlight");
-    randomNumbers[diag1End - 2].classList.add("diagHighlight");
-
-    diag1_matches.push(randomNumbers[diag1End].innerHTML);
-  }
-
-  return (diag1_matches[0]);
-}
-
-rowMatches(0,2);
-rowMatches(3,5);
-rowMatches(6,8);
-colMatches(0,6);
-colMatches(1,7);
-colMatches(2,8);
-diagMatches(0,8);
-diag1Matches(2,6)
-
-//Search for which row has matches
-
-function whichRow(rowBegin,rowEnd){
-
-  if (rowBegin === 0 || rowEnd === 2){
+  if (start === 0 && end === 2) {
     return ("Row-one");
-  }
-  else if (rowBegin === 3 || rowEnd === 5){
+  } else if (start === 3 && end === 5) {
     return ("Row-two");
-  }
-  else if (rowBegin === 6 || rowEnd === 8){
+  } else if (start === 6 && end === 8) {
     return ("Row-three");
-  }
-}
-
-//Search for which column has matches
-
-function whichCol(colBegin,colEnd){
-
-  if (colBegin === 0 || colEnd === 6){
+  } else if (start === 0 && end === 6) {
     return ("Column-one");
-  }
-  else if (colBegin === 1 || colEnd === 7){
+  } else if (start === 1 && end === 7) {
     return ("Column-two");
-  }
-  else if (colBegin === 2 || colEnd === 8){
+  } else if (start === 2 && end === 8) {
     return ("Column-three");
+  } else if (start === 0 && end === 8) {
+    return ("First-Diagonal");
+  } else if (start === 2 && end === 6) {
+    return ("Second-Diagonal");
   }
 }
 
@@ -158,28 +81,19 @@ function whichCol(colBegin,colEnd){
 
 var rowMessage = document.getElementById("rowDisplay");
 var colMessage = document.getElementById("colDisplay");
+var diagMessage = document.getElementById("diagDisplay");
 
-function rowMatchDisplay(rowBegin,rowEnd){
+function matchDisplay(start, end, gap, highlight) {
 
-  if (rowMatches(rowBegin,rowEnd) !== undefined){
-    return ("Match found in " + whichRow(rowBegin,rowEnd) + " with " + rowMatches(rowBegin,rowEnd) + 's matching' );
-
-  }
-  else {
-    return ('No match in ' + whichRow(rowBegin,rowEnd));
-  }
-}
-
-function colMatchDisplay(colBegin,colEnd){
-
-  if (colMatches(colBegin,colEnd) !== undefined){
-    return ("Match in " + whichCol(colBegin,colEnd) + " with " + colMatches(colBegin,colEnd) + 's matching' );
-  }
-  else {
-    return ('No match in ' + whichCol(colBegin,colEnd));
+  if (checkMatches(start, end, gap, highlight) !== undefined) {
+    return ("Match found in " + whichRowOrCol(start, end, gap, highlight) + " with " + checkMatches(start, end, gap, highlight) + 's matching');
+  } else {
+    return ('No match in ' + whichRowOrCol(start, end, gap, highlight));
   }
 }
 
+//Display message
 
-rowMessage.innerHTML = rowMatchDisplay(0,2) + " and <br> " + rowMatchDisplay(3,5) + " and <br> " + rowMatchDisplay(6,8);
-colMessage.innerHTML = colMatchDisplay(0,6) + " and <br> " + colMatchDisplay(1,7) + " and <br> " + colMatchDisplay(2,8);
+rowMessage.innerHTML = matchDisplay(0, 2, 1, "rowHighlight") + " and <br> " + matchDisplay(3, 5, 1, "rowHighlight") + " and <br> " + matchDisplay(6, 8, 1, "rowHighlight");
+colMessage.innerHTML = matchDisplay(0, 6, 3, "colHighlight") + " and <br> " + matchDisplay(1, 7, 3, "colHighlight") + " and <br> " + matchDisplay(2, 8, 3, "colHighlight");
+diagMessage.innerHTML = matchDisplay(0, 8, 4, "diagHighlight") + " and <br> " + matchDisplay(2, 6, 2, "diagHighlight");
